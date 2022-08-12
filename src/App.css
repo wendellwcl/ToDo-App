@@ -2,15 +2,15 @@
     display: grid;
     grid-template-columns: 1fr 64px;
     grid-template-rows: 100vh;
-    grid-template-areas: "main nav";
+    grid-template-areas: "main aside";
 }
 
 main{
     grid-area: main;
 }
 
-nav{
-    grid-area: nav;
+aside{
+    grid-area: aside;
     background: rgba(0, 0, 0, 0.2);
 }
 

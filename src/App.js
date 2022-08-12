@@ -1,17 +1,22 @@
+//Packages
+import { HashRouter } from 'react-router-dom';
+
 //Css
 import './App.css';
 
 //Components
-import Routes from "./Components/MainComponents/Routes";
-import NavAside from "./Components/MainComponents/NavAside";
+import AppRoutes from "./Components/MainComponents/AppRoutes";
+import AsideNav from "./Components/MainComponents/AsideNav";
 
 
 function App() {
 
   return (
     <div id='app'>
-      <NavAside />
-      <Routes />
+      <HashRouter>
+        <AsideNav />
+        <AppRoutes />
+      </HashRouter>
     </div>
   );
 
