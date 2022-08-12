@@ -1,9 +1,20 @@
+//Css
+import './App.css';
+
+//Components
+import Routes from "./Components/MainComponents/Routes";
+import NavAside from "./Components/MainComponents/NavAside";
+
+
 function App() {
+
   return (
-    <div className="App">
-      Hello World
+    <div id='app'>
+      <NavAside />
+      <Routes />
     </div>
   );
-}
+
+};
 
 export default App;

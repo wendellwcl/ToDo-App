@@ -1,0 +1,23 @@
+#app{
+    display: grid;
+    grid-template-columns: 1fr 64px;
+    grid-template-rows: 100vh;
+    grid-template-areas: "main nav";
+}
+
+main{
+    grid-area: main;
+}
+
+nav{
+    grid-area: nav;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+
+    #app{
+        grid-template-columns: 1fr 360px;
+    }
+
+}
