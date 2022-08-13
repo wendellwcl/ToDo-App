@@ -1,0 +1,94 @@
+aside{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 64px;
+    height: 100vh;
+    padding: 80px 0 0 0;
+    z-index: 2;
+    background: #e2e2e2;
+}
+
+aside.expand{
+    width: 100%;
+    max-width: 360px;
+}
+
+#asideNav-fade{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    display: none;
+}
+
+#asideNav-fade.display{
+    display: block;
+}
+
+#expand-btn{
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.nav-link{
+    list-style: none;
+
+}
+
+.nav-link a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link a.active{
+    color: blueviolet !important;
+}
+
+.nav-link a:visited{
+    color: inherit;
+}
+
+.link-icon{
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+}
+
+.link-text{
+    display: none;
+    font-size: 1rem;
+}
+
+aside.expand .link-text{
+    display: block;
+}
+
+@media (min-width: 768px){
+
+    aside{
+        width: 360px;
+        padding: 8px 16px;
+    }
+
+    #expand-btn{
+        display: none;
+    }
+
+    .link-text{
+        display: block;
+    }
+
+}

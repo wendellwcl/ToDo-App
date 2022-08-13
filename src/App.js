@@ -1,9 +1,6 @@
 //Packages
 import { HashRouter } from 'react-router-dom';
 
-//Css
-import './App.css';
-
 //Components
 import AppRoutes from "./Components/MainComponents/AppRoutes";
 import AsideNav from "./Components/MainComponents/AsideNav";
