@@ -1,11 +1,11 @@
-main{
+#main-container{
     width: calc(100% - 64px);
     height: 100vh;
 }
 
 @media (min-width: 768px){
 
-    main{
+    #main-container{
         width: calc(100% - 360px);
     }
 

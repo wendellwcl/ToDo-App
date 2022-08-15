@@ -2,9 +2,8 @@
 import { HashRouter } from 'react-router-dom';
 
 //Components
-import AppRoutes from "./Components/MainComponents/AppRoutes";
 import AsideNav from "./Components/MainComponents/AsideNav";
-
+import MainContainer from './Components/MainComponents/MainContainer';
 
 function App() {
 
@@ -12,7 +11,7 @@ function App() {
     <div id='app'>
       <HashRouter>
         <AsideNav />
-        <AppRoutes />
+        <MainContainer/>
       </HashRouter>
     </div>
   );
