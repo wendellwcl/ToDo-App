@@ -15,13 +15,24 @@ const AsideNav = () => {
     const asideEl = useRef();
     const fadeEl = useRef();
 
-    //Expandir & Retrair AsideNav
+    //Abrir & Fechar AsideNav
     function handleExpandAside(){
         const aside = asideEl.current;
         const fade = fadeEl.current;
         aside.classList.toggle('expand');
-        fade.classList.toggle('display');
+        fade.classList.toggle('show');
         setIsExpanded(!isExpanded);
+    };
+    
+    //Fechar AsideNav
+    function handleCloseAside(){
+        const aside = asideEl.current;
+        const fade = fadeEl.current;
+        if(aside.classList.contains('expand')){
+            aside.classList.remove('expand');
+            fade.classList.remove('show');
+            setIsExpanded(!isExpanded);
+        };
     };
 
 
@@ -35,19 +46,19 @@ const AsideNav = () => {
 
             <nav id="aside-nav">
                 <ul>
-                    <li className="nav-link">
+                    <li className="nav-link" onClick={handleCloseAside}>
                         <NavLink to='/'>
                             <span className="link-icon"><BsListTask/></span>
                             <span className="link-text">Lista de Tarefas</span>
                         </NavLink>
                     </li>
-                    <li className="nav-link">
+                    <li className="nav-link" onClick={handleCloseAside}>
                         <NavLink to='/important'>
                             <span className="link-icon"><BsStarFill/></span>
                             <span className="link-text">Marcadas como Importante</span>
                         </NavLink>
                     </li>
-                    <li className="nav-link">
+                    <li className="nav-link" onClick={handleCloseAside}>
                         <NavLink to='/notes'>
                             <span className="link-icon"><BsJournalText/></span>
                             <span className="link-text">Notas</span>

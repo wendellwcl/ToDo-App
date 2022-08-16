@@ -22,7 +22,7 @@ aside.expand{
     display: none;
 }
 
-#asideNav-fade.display{
+#asideNav-fade.show{
     display: block;
 }
 
