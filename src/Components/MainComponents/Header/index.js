@@ -32,7 +32,17 @@ const Header = () => {
     return(
         <header>
             { dateData &&
-                <span>{dateData.day},{dateData.dayOfTheWeek} - {dateData.month},{dateData.year}</span>
+                <div id='date'>
+                    <span id='day'>
+                        {dateData.day}
+                    </span>
+                    <span id='day-of-the-week'>
+                        {dateData.dayOfTheWeek}
+                    </span>
+                    <span id='month-year'>
+                        {dateData.month}, {dateData.year}
+                    </span>
+                </div>
             }
         </header>
     );

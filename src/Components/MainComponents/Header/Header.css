@@ -1,5 +1,37 @@
 header{
     width: 100%;
     height: 160px;
-    background: rgba(0, 0, 0, 0.2);
+    padding: .5rem;
+    background: linear-gradient(#CD23FA, #8A2BE2 75%);
+}
+
+#date{
+    width: 250px;
+    height: 80px;
+    color: white;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 'day day-of-the-week'
+                         'day month-year';
+}
+
+#day{
+    grid-area: day;
+    padding: 0 .5rem;
+    font-size: 3rem;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+}
+
+#day-of-the-week{
+    grid-area: day-of-the-week;
+    display: flex;
+    align-items: flex-end;
+    font-weight: 600;
+}
+
+#month-year{
+    grid-area: month-year;
 }

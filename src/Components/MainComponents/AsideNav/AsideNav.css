@@ -49,6 +49,7 @@ aside.expand{
     text-decoration: none;
     display: flex;
     align-items: center;
+    color: inherit;
 }
 
 .nav-link a.active{
