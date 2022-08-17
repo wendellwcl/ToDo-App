@@ -37,7 +37,7 @@ const Modal = ( { id, title, children } ) => {
 
 
     return(
-        <div className='modal show' id={id}>
+        <div className='modal' id={id}>
             <div className='fade' onClick={e => handleCloseModal(e)}></div>
             <div className='modal-dialog'>
                 <div className='modal-header'>

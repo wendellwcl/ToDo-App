@@ -2,7 +2,7 @@ header{
     width: 100%;
     height: 160px;
     padding: .5rem;
-    background: linear-gradient(#CD23FA, #8A2BE2 75%);
+    background: linear-gradient(var(--secondary-color), var(--primary-color) 75%);
 }
 
 #date{

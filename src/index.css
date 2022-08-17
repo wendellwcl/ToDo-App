@@ -1,3 +1,9 @@
+:root{
+  --primary-color: #8A2BE2;
+  --secondary-color: #CD23FA;
+  --light-color: #F4F4FA;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -12,4 +18,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+}
+
+label{
+  display: block;
+}
+
+input:not([type=checkbox]), textarea{
+  display: inline-block;
+  padding: 4px;
+  width: 100%;
+}
+
+input[type=checkbox]{
+  display: inline !important;
+}
+
+textarea{
+  resize: none;
+  height: 80px;
+}
+
+.btn{
+  padding: 8px;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  color: var(--light-color);
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover{
+  background: var(--secondary-color);
 }
