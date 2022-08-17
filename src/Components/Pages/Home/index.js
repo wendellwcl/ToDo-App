@@ -5,15 +5,22 @@ import { BsStar, BsStarFill } from 'react-icons/bs';
 //Css
 import './Home.css';
 
+//Custom Hooks
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
+
 //Components
 import Modal from  '../../MainComponents/Modal';
 
 const Home = () => {
 
-    const [ task, setTask ] = useState();
-    const [ subject, setSubject ] = useState();
-    const [ description, setDescription ] = useState();
-    const [ importantTask, setImportantTask ] = useState();
+    const { getItem, setItem, removeItem } = useLocalStorage();
+    const tasksList = getItem('tasks') || [];
+
+    
+    const [ task, setTask ] = useState('');
+    const [ subject, setSubject ] = useState('');
+    const [ description, setDescription ] = useState('');
+    const [ importantTask, setImportantTask ] = useState(false);
 
 
     //Abrir Modal
@@ -21,6 +28,7 @@ const Home = () => {
         document.querySelector(`#${id}`).classList.add('show');
     };
 
+    //Controle de estado da checkbox
     function handleImportantTask(){
         setImportantTask(!importantTask);
     };
@@ -28,6 +36,16 @@ const Home = () => {
     //Ação de Submit
     function handleSubmitTask(e){
         e.preventDefault();
+
+        const newTask = {
+            task,
+            subject,
+            description,
+            importantTask
+        };
+
+        //Setar no localStorage
+        setItem('tasks', [...tasksList, newTask]);
 
         //Fechar Modal
         let el  = e.target;
@@ -55,11 +73,11 @@ const Home = () => {
                     </label>
                     <label htmlFor="subject">
                         <span>Assunto</span>
-                        <input type="text" id='subject' placeholder='(opcional)' value={subject} onChange={e => setSubject(e.target.value)} />
+                        <input type="text" id='subject' placeholder='(opcional)' onChange={e => setSubject(e.target.value)} />
                     </label>
                     <label htmlFor="description">
                         <span>Descrição</span>
-                        <textarea id='description' placeholder='(opcional)' value={description} onChange={e => setDescription(e.target.value)}></textarea>
+                        <textarea id='description' placeholder='(opcional)' onChange={e => setDescription(e.target.value)}></textarea>
                     </label>
                     <div id='checkbox-container'>
                         <input type="checkbox" id="important-task" onChange={handleImportantTask} />
