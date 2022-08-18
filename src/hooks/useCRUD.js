@@ -35,7 +35,7 @@ const useCRUD = () => {
         },
 
         crudDelete: (local, index) => {
-            if(local && (index || index === 0)){
+            if(local && (index !== null || index !== undefined)){
                 data = getItem(local);
                 data.splice(index, 1);
                 setItem(local, data);
