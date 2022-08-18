@@ -10,17 +10,18 @@ import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 //Components
 import Modal from  '../../MainComponents/Modal';
+import TaskItem from '../../MainComponents/SecondaryComponents/TaskItem';
 
 const Home = () => {
 
-    const { getItem, setItem, removeItem } = useLocalStorage();
+    const { getItem, setItem } = useLocalStorage();
     const tasksList = getItem('tasks') || [];
 
     
     const [ task, setTask ] = useState('');
     const [ subject, setSubject ] = useState('');
     const [ description, setDescription ] = useState('');
-    const [ importantTask, setImportantTask ] = useState(false);
+    const [ isImportant, setIsImportant ] = useState(false);
 
 
     //Abrir Modal
@@ -29,8 +30,8 @@ const Home = () => {
     };
 
     //Controle de estado da checkbox
-    function handleImportantTask(){
-        setImportantTask(!importantTask);
+    function handleIsImportant(){
+        setIsImportant(!isImportant);
     };
 
     //Ação de Submit
@@ -41,7 +42,7 @@ const Home = () => {
             task,
             subject,
             description,
-            importantTask
+            isImportant
         };
 
         //Setar no localStorage
@@ -59,12 +60,14 @@ const Home = () => {
         setTask('');
         setSubject('');
         setDescription('');
-        setImportantTask(false);
+        setIsImportant(false);
     };
 
     return(
         <section id='home-section'>
+
             <button type='button' className='btn' onClick={() => handleShowAddTaskModal('add-task-modal')}>Adicionar tarefa</button>
+
             <Modal id='add-task-modal' title='Adicionar tarefa'>
                 <form id='create-task-form' onSubmit={e => handleSubmitTask(e)}>
                     <label htmlFor="task">
@@ -73,16 +76,16 @@ const Home = () => {
                     </label>
                     <label htmlFor="subject">
                         <span>Assunto</span>
-                        <input type="text" id='subject' placeholder='(opcional)' onChange={e => setSubject(e.target.value)} />
+                        <input type="text" id='subject' placeholder='(opcional)' value={subject} onChange={e => setSubject(e.target.value)} />
                     </label>
                     <label htmlFor="description">
                         <span>Descrição</span>
-                        <textarea id='description' placeholder='(opcional)' onChange={e => setDescription(e.target.value)}></textarea>
+                        <textarea id='description' placeholder='(opcional)' value={description} onChange={e => setDescription(e.target.value)}></textarea>
                     </label>
                     <div id='checkbox-container'>
-                        <input type="checkbox" id="important-task" onChange={handleImportantTask} />
+                        <input type="checkbox" id="important-task" onChange={handleIsImportant} />
                         <label htmlFor='important-task'>
-                            {importantTask ? <BsStarFill/> : <BsStar/>}
+                            {isImportant ? <BsStarFill/> : <BsStar/>}
                             Marcar como importante
                         </label>
                     </div>
@@ -91,6 +94,20 @@ const Home = () => {
                     </button>
                 </form>
             </Modal>
+
+            <ul>
+                {tasksList &&
+                    tasksList.map((item, index) => (
+                        <TaskItem key={index} 
+                        task={item.task} 
+                        subject={item.subject} 
+                        description={item.description} 
+                        isImportant={item.isImportant} 
+                        />
+                    ))
+                }
+            </ul>
+
         </section>
     );
 

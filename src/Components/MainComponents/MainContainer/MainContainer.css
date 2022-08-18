@@ -3,6 +3,11 @@
     height: 100vh;
 }
 
+#main-container > main{
+    height: calc(100vh - 160px);
+    overflow-y: scroll;
+}
+
 @media (min-width: 768px){
 
     #main-container{
