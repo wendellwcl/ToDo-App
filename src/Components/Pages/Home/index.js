@@ -1,31 +1,36 @@
 //Packages
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 
 //Css
 import './Home.css';
 
 //Custom Hooks
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import { useCRUD } from '../../../hooks/useCRUD';
 
 //Components
 import Modal from  '../../MainComponents/Modal';
-import TaskItem from '../../MainComponents/SecondaryComponents/TaskItem';
+import TaskItem from '../../SecondaryComponents/TaskItem';
 
 const Home = () => {
 
-    const { getItem, setItem } = useLocalStorage();
-    const tasksList = getItem('tasks') || [];
+    const { crudCreate, crudRead } = useCRUD();
 
-    
+    const [ tasksList, setTasksList ] = useState();
     const [ task, setTask ] = useState('');
     const [ subject, setSubject ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ isImportant, setIsImportant ] = useState(false);
 
 
+    //Obter e Atualizar TasksList
+    useEffect(() => {
+        setTasksList(crudRead('tasks'));
+    });
+
+
     //Abrir Modal
-    function handleShowAddTaskModal(id){
+    function handleShowModal(id){
         document.querySelector(`#${id}`).classList.add('show');
     };
 
@@ -46,7 +51,7 @@ const Home = () => {
         };
 
         //Setar no localStorage
-        setItem('tasks', [...tasksList, newTask]);
+        crudCreate('tasks', newTask);
 
         //Fechar Modal
         let el  = e.target;
@@ -56,7 +61,7 @@ const Home = () => {
         };
         parent.classList.remove('show');
 
-        //Limpar/resetar campos
+        //Resetar estados de inputs
         setTask('');
         setSubject('');
         setDescription('');
@@ -66,7 +71,7 @@ const Home = () => {
     return(
         <section id='home-section'>
 
-            <button type='button' className='btn' onClick={() => handleShowAddTaskModal('add-task-modal')}>Adicionar tarefa</button>
+            <button type='button' className='btn' onClick={() => handleShowModal('add-task-modal')}>Adicionar tarefa</button>
 
             <Modal id='add-task-modal' title='Adicionar tarefa'>
                 <form id='create-task-form' onSubmit={e => handleSubmitTask(e)}>
@@ -103,6 +108,8 @@ const Home = () => {
                         subject={item.subject} 
                         description={item.description} 
                         isImportant={item.isImportant} 
+                        local={'tasks'}
+                        index={index} 
                         />
                     ))
                 }

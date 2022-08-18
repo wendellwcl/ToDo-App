@@ -4,14 +4,16 @@ const useLocalStorage = () => {
 
     return{
 
-        getItem: (item) => {
-            return JSON.parse(storage.getItem(item));
+        getItem: (local) => {
+            return JSON.parse(storage.getItem(local));
         },
-        setItem: (item, obj) => {
-            storage.setItem(item, JSON.stringify(obj));
+
+        setItem: (local, obj) => {
+            storage.setItem(local, JSON.stringify(obj));
         },
-        removeItem: (item) => {
-            storage.removeItem(item);
+        
+        removeItem: (local) => {
+            storage.removeItem(local);
         }
 
     };

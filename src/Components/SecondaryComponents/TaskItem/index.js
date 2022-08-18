@@ -4,8 +4,14 @@ import { BsStar, BsStarFill, BsCheckLg, BsPencil, BsXLg } from 'react-icons/bs';
 //Css
 import './TaskItem.css';
 
+//Custom Hooks
+import { useCRUD } from '../../../hooks/useCRUD';
 
-const TaskItem = ( { task, subject, description, isImportant } ) => {
+
+const TaskItem = ( { task, subject, description, isImportant, index, local } ) => {
+
+    const { crudUpdate, crudDelete } = useCRUD();
+
 
     return(
 
@@ -36,7 +42,7 @@ const TaskItem = ( { task, subject, description, isImportant } ) => {
                     <button className='btn-task'>
                         <BsPencil/>
                     </button>
-                    <button className='btn-task'>
+                    <button className='btn-task' onClick={() => crudDelete(local, index)}>
                         <BsXLg/>
                     </button>
                 </div>
