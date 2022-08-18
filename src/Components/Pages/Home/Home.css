@@ -1,48 +1,4 @@
 #home-section{
+    height: 100%;
     padding: 16px;
-}
-
-#create-task-form > *:not(:last-child){
-    margin-bottom: 16px;
-}
-
-#btn-create-task{
-    display: inline-block;
-    width: 100%;
-    padding: 8px;
-    border: none;
-    background: var(--primary-color);
-    color: var(--light-color);
-    font-weight: bold;
-    cursor: pointer;
-    transition: .2s;
-}
-
-#btn-create-task:hover{
-    background: var(--secondary-color);
-}
-
-#checkbox-container{
-    position: relative;
-}
-
-#checkbox-container > label{
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#checkbox-container svg{
-    font-size: 1.5rem;
-    margin-right: 8px;
-    color: var(--primary-color);
-}
-
-#checkbox-container input{
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
-    visibility: hidden;
 }
