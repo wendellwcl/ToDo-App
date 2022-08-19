@@ -1,5 +1,5 @@
 //Packages
-import { useState } from "react";
+import { useContext } from "react";
 import { BsStar, BsStarFill } from 'react-icons/bs';
 
 //Css
@@ -8,30 +8,50 @@ import './HomeModal.css';
 //Custom Hooks
 import { useCRUD } from '../../../hooks/useCRUD';
 
+//Context
+import { TasksContext } from "../../../context/TasksContext";
+
 //Components
 import Modal from  '../../MainComponents/Modal';
 
 
 const HomeModal = () => {
 
-    const { crudCreate } = useCRUD();
+    const { crudCreate, crudUpdate } = useCRUD();
+    const { action, setAction, 
+            task, setTask, 
+            subject, setSubject, 
+            description, setDescription, 
+            isImportant, setIsImportant,
+            index } = useContext(TasksContext);
 
-    const [ task, setTask ] = useState('');
-    const [ subject, setSubject ] = useState('');
-    const [ description, setDescription ] = useState('');
-    const [ isImportant, setIsImportant ] = useState(false);
+
+    //Resetar inputs
+    function resetInputs(){
+        setTask('');
+        setSubject('');
+        setDescription('');
+        setIsImportant(false);
+    };
 
     //Abrir Modal
-    function handleShowModal(id){
+    function handleShowModal(id){        
         document.querySelector(`#${id}`).classList.add('show');
     };
 
-    //Controle de estado da checkbox
+    //Criar nova tarefa
+    function handleCreate(){
+        setAction('create');
+        resetInputs();
+        handleShowModal('home-modal');
+    };
+
+    //Controlar estado da checkbox
     function handleIsImportant(){
         setIsImportant(!isImportant);
     };
 
-    //Ação de Submit
+    //Submit - Salvar tarefa
     function handleSubmitTask(e){
         e.preventDefault();
 
@@ -42,8 +62,12 @@ const HomeModal = () => {
             isImportant
         };
 
-        //Setar no localStorage
-        crudCreate('tasks', newTask);
+        //Verificar e realizar ação (create / update)
+        if(action === 'create'){
+            crudCreate('tasks', newTask);
+        } else if(action === 'update'){
+            crudUpdate('tasks', index, newTask);
+        };
 
         //Fechar Modal
         let el  = e.target;
@@ -54,30 +78,41 @@ const HomeModal = () => {
         parent.classList.remove('show');
 
         //Resetar estados de inputs
-        setTask('');
-        setSubject('');
-        setDescription('');
-        setIsImportant(false);
+        resetInputs();
     };
 
 
     return(
         <>
-        <button type='button' className='btn' onClick={() => handleShowModal('add-task-modal')}>Adicionar tarefa</button>
+        <button type='button' className='btn' onClick={handleCreate}>Adicionar tarefa</button>
 
-        <Modal id='add-task-modal' title='Adicionar tarefa'>
+        <Modal id='home-modal' title='Tarefa'>
             <form id='create-task-form' onSubmit={e => handleSubmitTask(e)}>
                 <label htmlFor="task">
                     <span>Tarefa *</span>
-                    <input type="text" id='task' value={task} onChange={e => setTask(e.target.value)} required/>
+                    <input type="text" 
+                            id='task' 
+                            value={task} 
+                            onChange={e => setTask(e.target.value)} 
+                            required
+                    />
                 </label>
                 <label htmlFor="subject">
                     <span>Assunto</span>
-                    <input type="text" id='subject' placeholder='(opcional)' value={subject} onChange={e => setSubject(e.target.value)} />
+                    <input type="text" 
+                            id='subject' 
+                            placeholder='(opcional)' 
+                            value={subject} 
+                            onChange={e => setSubject(e.target.value)} 
+                    />
                 </label>
                 <label htmlFor="description">
                     <span>Descrição</span>
-                    <textarea id='description' placeholder='(opcional)' value={description} onChange={e => setDescription(e.target.value)}></textarea>
+                    <textarea id='description' 
+                                placeholder='(opcional)' 
+                                value={description} 
+                                onChange={e => setDescription(e.target.value)}>
+                    </textarea>
                 </label>
                 <div id='checkbox-container'>
                     <input type="checkbox" id="important-task" onChange={handleIsImportant} />
@@ -87,7 +122,7 @@ const HomeModal = () => {
                     </label>
                 </div>
                 <button type="submit" id='btn-create-task'>
-                    Criar
+                    Salvar
                 </button>
             </form>
         </Modal>

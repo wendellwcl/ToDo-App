@@ -1,8 +1,12 @@
 //Packages
+import { useContext } from 'react';
 import { BsStar, BsStarFill, BsCheckLg, BsPencil, BsXLg } from 'react-icons/bs';
 
 //Css
 import './TaskItem.css';
+
+//Context
+import { TasksContext } from '../../../context/TasksContext';
 
 //Custom Hooks
 import { useCRUD } from '../../../hooks/useCRUD';
@@ -10,7 +14,45 @@ import { useCRUD } from '../../../hooks/useCRUD';
 
 const TaskItem = ( { task, subject, description, isImportant, index, local } ) => {
 
-    const { crudUpdate, crudDelete } = useCRUD();
+    const { crudRead, crudUpdate, crudDelete } = useCRUD();
+    const { setAction, setTask, setSubject, setDescription, setIsImportant, setIndex } = useContext(TasksContext);
+
+
+    //Editar informações da tarefa
+    function handleEdit(local, index){
+
+        //Obter informações da tarefa que será editada
+        const { task, subject, description, isImportant } = crudRead(local, index);
+
+        //Setar estados referentes aos inputs, para que as informações sejam exibidas ao usuário
+        setAction('update');
+        setTask(task);
+        setSubject(subject || '');
+        setDescription(description || '');
+        setIsImportant(isImportant);
+        setIndex(index);
+
+        //Abrir modal
+        document.querySelector('#home-modal').classList.add('show');
+    };
+
+    //Toggle isImportant
+    function handleUpdateIsImportant(local, index){
+
+        //Obter informações da tarefa que será editada
+        const { task, subject, description, isImportant } = crudRead(local, index);
+
+        //Realizar Toggle na propriedade isImportant
+        const updatedTask = {
+            task, 
+            subject, 
+            description,
+            isImportant: !isImportant
+        };
+
+        //Salvar alteração
+        crudUpdate(local, index, updatedTask);
+    };
 
 
     return(
@@ -20,7 +62,7 @@ const TaskItem = ( { task, subject, description, isImportant, index, local } ) =
             <div className='task-main'>
 
                 <div>
-                    <button className='btn-isImportant'>
+                    <button className='btn-isImportant' onClick={() => handleUpdateIsImportant(local, index)}>
                         {isImportant ? <BsStarFill/> : <BsStar/>}
                     </button>
                 </div>
@@ -39,7 +81,7 @@ const TaskItem = ( { task, subject, description, isImportant, index, local } ) =
                     <button className='btn-task'>
                         <BsCheckLg/>
                     </button>
-                    <button className='btn-task'>
+                    <button className='btn-task' onClick={() => handleEdit(local, index)}>
                         <BsPencil/>
                     </button>
                     <button className='btn-task' onClick={() => crudDelete(local, index)}>

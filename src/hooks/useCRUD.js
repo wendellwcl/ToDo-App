@@ -4,11 +4,10 @@ import { useLocalStorage } from './useLocalStorage';
 
 const useCRUD = () => {
 
-    
+    const event = new Event('localStorageChange');
     const { getItem, setItem } = useLocalStorage();
     let data;
 
-    const event = new Event('localStorageChange');
     
     return{
         
@@ -22,7 +21,7 @@ const useCRUD = () => {
         },
 
         crudRead: (local, index) => {
-            if(local && index){
+            if(local && index > -1){
                 data = getItem(local);
                 return data[index];
             } else if(local && !index){
@@ -32,16 +31,16 @@ const useCRUD = () => {
         },
         
         crudUpdate: (local, index, updatedItem) => {
-            if(local && index && updatedItem){
+            if(local && index > -1 && updatedItem){
                 data = getItem(local);
-                data.splice(1, index, updatedItem);
+                data.splice(index, 1, updatedItem);
                 setItem(local, data);
             };
             document.dispatchEvent(event);
         },
         
         crudDelete: (local, index) => {
-            if(local && (index !== null || index !== undefined)){
+            if(local && index > -1){
                 data = getItem(local);
                 data.splice(index, 1);
                 setItem(local, data);

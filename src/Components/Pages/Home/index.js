@@ -7,6 +7,9 @@ import './Home.css';
 //Custom Hooks
 import { useCRUD } from '../../../hooks/useCRUD';
 
+//Context
+import { TasksContextProvider } from '../../../context/TasksContext';
+
 //Components
 import TaskItem from '../../SecondaryComponents/TaskItem';
 import HomeModal from '../../SecondaryComponents/HomeModal';
@@ -23,26 +26,28 @@ const Home = () => {
 
 
     return(
-        <section id='home-section'>
+        <TasksContextProvider>
+            <section id='home-section'>
 
-            <HomeModal/>
+                <HomeModal/>
 
-            <ul>
-                {tasksList &&
-                    tasksList.map((item, index) => (
-                        <TaskItem key={index} 
-                        task={item.task} 
-                        subject={item.subject} 
-                        description={item.description} 
-                        isImportant={item.isImportant} 
-                        local={'tasks'}
-                        index={index} 
-                        />
-                    ))
-                }
-            </ul>
+                <ul>
+                    {tasksList &&
+                        tasksList.map((item, index) => (
+                            <TaskItem key={index} 
+                            task={item.task} 
+                            subject={item.subject} 
+                            description={item.description} 
+                            isImportant={item.isImportant} 
+                            local={'tasks'}
+                            index={index} 
+                            />
+                        ))
+                    }
+                </ul>
 
-        </section>
+            </section>
+        </TasksContextProvider>
     );
 
 };
