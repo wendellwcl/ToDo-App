@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { BsStar, BsStarFill } from 'react-icons/bs';
 
 //Css
-import './HomeModal.css';
+import './MainModal.css';
 
 //Custom Hooks
 import { useCRUD } from '../../../hooks/useCRUD';
@@ -18,7 +18,7 @@ import Modal from  '../../MainComponents/Modal';
 const HomeModal = () => {
 
     const { crudCreate, crudUpdate } = useCRUD();
-    const { action, setAction, 
+    const { action,  
             task, setTask, 
             subject, setSubject, 
             description, setDescription, 
@@ -32,18 +32,6 @@ const HomeModal = () => {
         setSubject('');
         setDescription('');
         setIsImportant(false);
-    };
-
-    //Abrir Modal
-    function handleShowModal(id){        
-        document.querySelector(`#${id}`).classList.add('show');
-    };
-
-    //Criar nova tarefa
-    function handleCreate(){
-        setAction('create');
-        resetInputs();
-        handleShowModal('home-modal');
     };
 
     //Controlar estado da checkbox
@@ -83,10 +71,7 @@ const HomeModal = () => {
 
 
     return(
-        <>
-        <button type='button' className='btn' onClick={handleCreate}>Adicionar tarefa</button>
-
-        <Modal id='home-modal' title='Tarefa'>
+        <Modal id='modal' title='Tarefa'>
             <form id='create-task-form' onSubmit={e => handleSubmitTask(e)}>
                 <label htmlFor="task">
                     <span>Tarefa *</span>
@@ -126,7 +111,6 @@ const HomeModal = () => {
                 </button>
             </form>
         </Modal>
-        </>
     );
 
 };

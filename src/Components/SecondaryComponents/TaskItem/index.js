@@ -33,7 +33,7 @@ const TaskItem = ( { task, subject, description, isImportant, index, local } ) =
         setIndex(index);
 
         //Abrir modal
-        document.querySelector('#home-modal').classList.add('show');
+        document.querySelector('#modal').classList.add('show');
     };
 
     //Toggle isImportant

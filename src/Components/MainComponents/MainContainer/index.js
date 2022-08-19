@@ -4,6 +4,7 @@ import './MainContainer.css';
 //Components
 import Header from "../Header";
 import AppRoutes from '../AppRoutes';
+import MainModal from '../../SecondaryComponents/MainModal';
 
 
 const MainContainer = () => {
@@ -12,6 +13,7 @@ const MainContainer = () => {
         <section id="main-container">
             <Header/>
             <main>
+                <MainModal/>
                 <AppRoutes/>
             </main>
         </section>

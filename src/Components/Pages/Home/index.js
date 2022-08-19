@@ -1,5 +1,5 @@
 //Packages
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 //Css
 import './Home.css';
@@ -8,46 +8,55 @@ import './Home.css';
 import { useCRUD } from '../../../hooks/useCRUD';
 
 //Context
-import { TasksContextProvider } from '../../../context/TasksContext';
+import { TasksContext } from '../../../context/TasksContext';
 
 //Components
 import TaskItem from '../../SecondaryComponents/TaskItem';
-import HomeModal from '../../SecondaryComponents/HomeModal';
 
 
 const Home = () => {
 
     const { crudRead } = useCRUD();
     const [ tasksList, setTasksList ] = useState(crudRead('tasks'));
+    const { setAction, setTask, setSubject, setDescription, setIsImportant } = useContext(TasksContext);
 
     document.addEventListener('localStorageChange', () => {
         setTasksList(crudRead('tasks'));
     });
 
 
+    //Criar nova tarefa
+    function handleCreate(){
+        setAction('create');
+        setTask('');
+        setSubject('');
+        setDescription('');
+        setIsImportant(false);
+        document.querySelector("#modal").classList.add('show');
+    };
+
+
     return(
-        <TasksContextProvider>
-            <section id='home-section'>
+        <section id='home-section'>
 
-                <HomeModal/>
+            <button type='button' className='btn' onClick={handleCreate}>Adicionar tarefa</button>
 
-                <ul>
-                    {tasksList &&
-                        tasksList.map((item, index) => (
-                            <TaskItem key={index} 
-                            task={item.task} 
-                            subject={item.subject} 
-                            description={item.description} 
-                            isImportant={item.isImportant} 
-                            local={'tasks'}
-                            index={index} 
-                            />
-                        ))
-                    }
-                </ul>
+            <ul>
+                {tasksList &&
+                    tasksList.map((item, index) => (
+                        <TaskItem key={index} 
+                        task={item.task} 
+                        subject={item.subject} 
+                        description={item.description} 
+                        isImportant={item.isImportant} 
+                        local={'tasks'}
+                        index={index} 
+                        />
+                    ))
+                }
+            </ul>
 
-            </section>
-        </TasksContextProvider>
+        </section>
     );
 
 };

@@ -44,6 +44,7 @@ textarea{
   background: var(--primary-color);
   border: none;
   border-radius: 5px;
+  font-weight: bold;
   color: var(--light-color);
   cursor: pointer;
   transition: .2s;
