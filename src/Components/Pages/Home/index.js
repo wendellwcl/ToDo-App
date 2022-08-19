@@ -1,14 +1,12 @@
 //Packages
-import { useState, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 //Css
 import './Home.css';
 
 //Custom Hooks
 import { useCRUD } from '../../../hooks/useCRUD';
-
-//Context
-import { TasksContext } from '../../../context/TasksContext';
+import { useOverflow } from '../../../hooks/useOverflow';
 
 //Components
 import TaskItem from '../../SecondaryComponents/TaskItem';
@@ -17,31 +15,23 @@ import TaskItem from '../../SecondaryComponents/TaskItem';
 const Home = () => {
 
     const { crudRead } = useCRUD();
+    const { checkOverflow } = useOverflow();
     const [ tasksList, setTasksList ] = useState(crudRead('tasks'));
-    const { setAction, setTask, setSubject, setDescription, setIsImportant } = useContext(TasksContext);
+    const homeTasksList = useRef();
 
     document.addEventListener('localStorageChange', () => {
         setTasksList(crudRead('tasks'));
     });
 
-
-    //Criar nova tarefa
-    function handleCreate(){
-        setAction('create');
-        setTask('');
-        setSubject('');
-        setDescription('');
-        setIsImportant(false);
-        document.querySelector("#modal").classList.add('show');
-    };
+    useEffect(() => {
+        checkOverflow(homeTasksList.current);
+    }, [tasksList, checkOverflow]);
 
 
     return(
         <section id='home-section'>
 
-            <button type='button' className='btn' onClick={handleCreate}>Adicionar tarefa</button>
-
-            <ul>
+            <ul className='tasks-list' ref={homeTasksList}>
                 {tasksList &&
                     tasksList.map((item, index) => (
                         <TaskItem key={index} 

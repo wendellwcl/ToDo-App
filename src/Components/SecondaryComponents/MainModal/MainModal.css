@@ -1,3 +1,8 @@
+#create-task-form{
+    width: calc(100vw - 64px);
+    max-width: 720px;
+}
+
 #create-task-form > *:not(:last-child){
     margin-bottom: 16px;
 }
@@ -7,6 +12,7 @@
     width: 100%;
     padding: 8px;
     border: none;
+    border-radius: 8px;
     background: var(--primary-color);
     color: var(--light-color);
     font-weight: bold;

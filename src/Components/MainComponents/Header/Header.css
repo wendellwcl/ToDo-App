@@ -3,12 +3,13 @@ header{
     height: 160px;
     padding: .5rem;
     background: linear-gradient(var(--secondary-color), var(--primary-color) 75%);
+    position: relative;
 }
 
 #date{
     width: 250px;
     height: 80px;
-    color: white;
+    color: var(--light-color);
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: repeat(2, 1fr);
@@ -34,4 +35,19 @@ header{
 
 #month-year{
     grid-area: month-year;
+}
+
+#create-btn{
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    background: var(--light-color);
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+}
+
+#create-btn svg{
+    font-size: 1.5rem;
+    margin-right: 8px;
 }

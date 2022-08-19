@@ -20,8 +20,6 @@
 .modal-dialog{
     padding: 1rem;
     background-color: #F4F4FA;
-    width: 100%;
-    max-width: 720px;
     border-radius: 1rem;
     z-index: 10;
 }

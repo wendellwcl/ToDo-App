@@ -1,0 +1,7 @@
+#important-section{
+    height: calc(100vh - 160px);
+}
+
+#important-section .tasks-list{
+    height: 100%;
+}

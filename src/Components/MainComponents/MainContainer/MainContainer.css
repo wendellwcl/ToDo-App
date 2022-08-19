@@ -1,11 +1,11 @@
 #main-container{
-    width: calc(100% - 64px);
+    width: calc(100vw - 64px);
     height: 100vh;
+    background: var(--light-color);
 }
 
 #main-container > main{
     height: calc(100vh - 160px);
-    overflow-y: scroll;
 }
 
 @media (min-width: 768px){

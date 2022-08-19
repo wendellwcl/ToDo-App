@@ -18,6 +18,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 label{
@@ -54,6 +55,6 @@ textarea{
   background: var(--secondary-color);
 }
 
-ul{
+.tasks-list{
   padding: 16px;
 }

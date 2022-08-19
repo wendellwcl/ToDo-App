@@ -1,12 +1,10 @@
 .task-item{
     list-style: none;
     padding: 8px 16px;
+    margin-bottom: 16px;
     border: 2px solid var(--primary-color);
     border-radius: 16px;
-}
-
-.task-item:not(:last-child){
-    margin-bottom: 16px;
+    background: var(--light-color);
 }
 
 .task-main{
@@ -39,7 +37,7 @@
 }
 
 .task-title{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 

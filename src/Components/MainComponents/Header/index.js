@@ -1,12 +1,17 @@
 //Packages
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { BsPlusCircle } from 'react-icons/bs';
 
 //Css
 import './Header.css';
 
+//Context
+import { TasksContext } from '../../../context/TasksContext';
+
 
 const Header = () => {
 
+    const { setAction, setTask, setSubject, setDescription, setIsImportant } = useContext(TasksContext);
     const [ dateData, setDateData ] = useState();
 
     //Obter informações sobre data
@@ -28,6 +33,16 @@ const Header = () => {
 
     }, []);
 
+    //Criar nova tarefa
+    function handleCreate(){
+        setAction('create');
+        setTask('');
+        setSubject('');
+        setDescription('');
+        setIsImportant(false);
+        document.querySelector("#modal").classList.add('show');
+    };
+
 
     return(
         <header>
@@ -44,6 +59,11 @@ const Header = () => {
                     </span>
                 </div>
             }
+
+            <button type='button' className='btn' id='create-btn' onClick={handleCreate}>
+                <BsPlusCircle/> Adicionar tarefa
+            </button>
+
         </header>
     );
 
