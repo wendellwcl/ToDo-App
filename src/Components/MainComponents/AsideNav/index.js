@@ -1,14 +1,18 @@
 //Packages
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BsArrowBarLeft,  BsX, BsListTask, BsStarFill } from "react-icons/bs";
 
 //Css
 import "./AsideNav.css";
 
+//Context
+import { TasksContext } from "../../../context/TasksContext";
+
 
 const AsideNav = () => {
 
+    const { completeTasksCount } = useContext(TasksContext);
     const [ isExpanded, setIsExpanded ] = useState(false);
 
     //Referenciando elementos
@@ -60,6 +64,13 @@ const AsideNav = () => {
                     </li>
                 </ul>
             </nav>
+
+            <div id="complete-tasks-count-container">
+                <p>Tarefas concluídas:</p>
+                <div id="complete-tasks-count">
+                    {completeTasksCount}
+                </div>
+            </div>
             
         </aside>
 

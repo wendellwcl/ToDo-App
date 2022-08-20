@@ -4,14 +4,17 @@ aside{
     right: 0px;
     width: 64px;
     height: 100vh;
-    padding: 80px 0 0 0;
+    padding: 80px 0px 0px 0px;
     z-index: 2;
     background: #E6E6EC;
+    display: flex;
+    flex-direction: column;
 }
 
 aside.expand{
     width: 100%;
     max-width: 360px;
+    padding: 80px 16px 16px 16px;
 }
 
 #asideNav-fade{
@@ -42,7 +45,6 @@ aside.expand{
 
 .nav-link{
     list-style: none;
-
 }
 
 .nav-link a{
@@ -77,6 +79,30 @@ aside.expand .link-text{
     display: block;
 }
 
+#complete-tasks-count-container{
+    display: none;
+    width: 100%;
+    margin-top: auto;
+    padding: 8px 16px;
+    background: linear-gradient(var(--secondary-color), var(--primary-color) 75%);
+    border-radius: 16px;
+    color: var(--light-color);
+    flex-direction: column;
+}
+
+aside.expand #complete-tasks-count-container{
+    display: flex;
+}
+
+#complete-tasks-count-container p{
+    font-weight: bold;
+}
+
+#complete-tasks-count{
+    font-size: 32px;
+    font-weight: bold;
+}
+
 @media (min-width: 768px){
 
     aside{
@@ -90,6 +116,10 @@ aside.expand .link-text{
 
     .link-text{
         display: block;
+    }
+
+    #complete-tasks-count-container{
+        display: flex;
     }
 
 }

@@ -3,15 +3,19 @@ import { useContext } from 'react';
 
 //Context
 import { TwoStepsContext } from '../context/TwoStepsContext';
+import { TasksContext } from '../context/TasksContext';
 
 //Custom hooks
 import { useCRUD } from './useCRUD';
+import { useLocalStorage } from './useLocalStorage';
 
 
 const useTwoStepsVerification = () => {
 
+    const { getItem, setItem } = useLocalStorage();
     const { crudDelete } = useCRUD();
     const { local, setLocal, index, setIndex, action, setAction } = useContext(TwoStepsContext);
+    const { setCompleteTasksCount } = useContext(TasksContext);
 
 
     return{
@@ -30,7 +34,9 @@ const useTwoStepsVerification = () => {
                         break;
                     case 'COMPLETE':
                         crudDelete(local, index);
-                        //CONTADOR ++
+                        const count = getItem('completeTasksCount') || 0;
+                        setItem('completeTasksCount', (count + 1));
+                        setCompleteTasksCount(count + 1);
                         break;
                     default:
                         break;
