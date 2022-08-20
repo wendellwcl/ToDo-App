@@ -10,11 +10,14 @@ import { TasksContext } from '../../../context/TasksContext';
 
 //Custom Hooks
 import { useCRUD } from '../../../hooks/useCRUD';
+import { useTwoStepsVerification } from '../../../hooks/useTwoStepsConfirmation';
 
 
 const TaskItem = ( { task, subject, description, isImportant, index, local } ) => {
 
-    const { crudRead, crudUpdate, crudDelete } = useCRUD();
+    const { twoStepsRequest } = useTwoStepsVerification();
+
+    const { crudRead, crudUpdate } = useCRUD();
     const { setAction, setTask, setSubject, setDescription, setIsImportant, setIndex } = useContext(TasksContext);
 
 
@@ -78,13 +81,13 @@ const TaskItem = ( { task, subject, description, isImportant, index, local } ) =
                 </div>
 
                 <div className='task-container-btn'>
-                    <button className='btn-task'>
+                    <button className='btn-task' onClick={() => twoStepsRequest(local, index, 'COMPLETE')}>
                         <BsCheckLg/>
                     </button>
                     <button className='btn-task' onClick={() => handleEdit(local, index)}>
                         <BsPencil/>
                     </button>
-                    <button className='btn-task' onClick={() => crudDelete(local, index)}>
+                    <button className='btn-task' onClick={() => twoStepsRequest(local, index, 'DELETE')}>
                         <BsXLg/>
                     </button>
                 </div>

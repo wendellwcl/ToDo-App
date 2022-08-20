@@ -1,7 +1,7 @@
 //Packages
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BsArrowBarLeft,  BsX, BsListTask, BsStarFill, BsJournalText } from "react-icons/bs";
+import { BsArrowBarLeft,  BsX, BsListTask, BsStarFill } from "react-icons/bs";
 
 //Css
 import "./AsideNav.css";
@@ -56,12 +56,6 @@ const AsideNav = () => {
                         <NavLink to='/important'>
                             <span className="link-icon"><BsStarFill/></span>
                             <span className="link-text">Marcadas como Importante</span>
-                        </NavLink>
-                    </li>
-                    <li className="nav-link" onClick={handleCloseAside}>
-                        <NavLink to='/notes'>
-                            <span className="link-icon"><BsJournalText/></span>
-                            <span className="link-text">Notas</span>
                         </NavLink>
                     </li>
                 </ul>

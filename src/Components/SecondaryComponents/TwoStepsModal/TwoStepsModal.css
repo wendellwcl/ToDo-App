@@ -1,0 +1,14 @@
+#two-steps-message{
+    max-width: 400px;
+}
+
+#two-steps-modal-btn-container{
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#two-steps-modal-btn-container > button:not(:last-child){
+    margin-right: 16px;
+}

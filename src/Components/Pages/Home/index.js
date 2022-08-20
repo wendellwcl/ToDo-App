@@ -19,10 +19,12 @@ const Home = () => {
     const [ tasksList, setTasksList ] = useState(crudRead('tasks'));
     const homeTasksList = useRef();
 
+    //Listener para executar atualização quando houver mudança no localStorage
     document.addEventListener('localStorageChange', () => {
         setTasksList(crudRead('tasks'));
     });
 
+    //Checar overflow no elemento para apresentar a scroolbar
     useEffect(() => {
         checkOverflow(homeTasksList.current);
     }, [tasksList, checkOverflow]);
@@ -32,7 +34,7 @@ const Home = () => {
         <section id='home-section'>
 
             <ul className='tasks-list' ref={homeTasksList}>
-                {tasksList &&
+                {tasksList && 
                     tasksList.map((item, index) => (
                         <TaskItem key={index} 
                         task={item.task} 
@@ -42,7 +44,7 @@ const Home = () => {
                         local={'tasks'}
                         index={index} 
                         />
-                    ))
+                    )) 
                 }
             </ul>
 
