@@ -5,6 +5,7 @@ import './MainContainer.css';
 import Header from "../Header";
 import AppRoutes from '../AppRoutes';
 import MainModal from '../../SecondaryComponents/MainModal';
+import TwoStepsModal from '../../SecondaryComponents/TwoStepsModal';
 
 
 const MainContainer = () => {
@@ -14,6 +15,7 @@ const MainContainer = () => {
             <Header/>
             <main>
                 <MainModal/>
+                <TwoStepsModal/>
                 <AppRoutes/>
             </main>
         </section>

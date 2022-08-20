@@ -40,7 +40,8 @@ const Header = () => {
         setSubject('');
         setDescription('');
         setIsImportant(false);
-        document.querySelector("#modal").classList.add('show');
+        document.querySelector('#modal').classList.add('show');
+        document.querySelector('#task').focus();
     };
 
 
